@@ -24,36 +24,46 @@ export default function App() {
 
 
   return (
-    <div className="container">
-    <form className="form" onSubmit={handleSubmit}>
-      <h1>Currency Converter</h1>
-      <input
-        type="text"
-        placeholder="Base Currency"
-        value={basecurr}
-        onChange={(e) => setbasecurr(e.target.value)}
-        className="input"
-      />
-      <input
-        type="text"
-        placeholder="Target Currency"
-        value={tarcurr}
-        onChange={(e) => settarcurr(e.target.value)}
-        className="input"
-      />
-      <button type="submit" className="btn">Convert</button>
-    </form>
+    <div className="min-h-screen flex justify-center items-center bg-gray-800 p-4">
+      <div className="w-full max-w-lg bg-white rounded-lg shadow-xl p-8 space-y-6">
+        <h1 className="text-4xl font-bold text-center text-indigo-600">Currency Converter</h1>
+        
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-3">
+            <input
+              type="text"
+              placeholder="Base Currency"
+              value={basecurr}
+              onChange={(e) => setbasecurr(e.target.value)}
+              className="w-full p-4 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+            <input
+              type="text"
+              placeholder="Target Currency"
+              value={tarcurr}
+              onChange={(e) => settarcurr(e.target.value)}
+              className="w-full p-4 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition duration-300 ease-in-out"
+          >
+            Convert
+          </button>
+        </form>
 
-    {loading && <p className="loading">Hold on...</p>}
+        {loading && <p className="text-center text-indigo-500">Loading...</p>}
 
-    {data && !loading && (
-      <div className="result">
-        <h3>Exchange Rate:</h3>
-        <p>
-          1 {basecurr} = {data.conversion_rate} {tarcurr}
-        </p>
+        {data && !loading && (
+          <div className="mt-6 p-4 bg-indigo-50 border-l-4 border-indigo-600 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold text-indigo-600">Exchange Rate:</h3>
+            <p className="text-lg text-gray-700">
+              1 {basecurr.toUpperCase()} = {data.conversion_rate} {tarcurr.toUpperCase()}
+            </p>
+          </div>
+        )}
       </div>
-    )}
-  </div>
+    </div>
   )
 }
